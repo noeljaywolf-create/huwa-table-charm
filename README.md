@@ -1,68 +1,159 @@
-# HUWA TABLE CHARM
+<div align="center">
 
-A full-stack tableware/kitchenware e-commerce storefront with a guided-selling AI assistant ("Charm").
+# ✦ HUWA TABLE CHARM
 
-## Stack
+**A full-stack tableware e-commerce storefront with a guided-selling AI assistant.**
 
-- **shared** `@huwa/shared` — domain types, Zod schemas, feature flags (single source of truth)
-- **backend** — Express + TypeScript + Knex (SQLite for dev/tests, PostgreSQL for prod)
-- **frontend** — React + Vite + Tailwind (storefront + admin + Charm chat widget)
-- **agent** — prompts/ and scaffold for the Charm Agent (logic lives in `backend/src/services/agent.service.ts`)
+Beautiful tables, built to last. React + TypeScript + Tailwind storefront, Express + Knex API,
+and **Charm** — an AI co-pilot that matches customers to the perfect table and kitchen pieces.
 
-## Features
+[![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)](https://reactjs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Vite](https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white)](https://vitejs.dev)
+[![Tailwind](https://img.shields.io/badge/Tailwind-CSS-38BDF8?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![Express](https://img.shields.io/badge/Express-4-000000?logo=express&logoColor=white)](https://expressjs.com)
+[![Knex](https://img.shields.io/badge/Knex-SQL-0A73B7?logo=knex&logoColor=white)](https://knexjs.org)
+[![SQLite](https://img.shields.io/badge/SQLite-Dev-003B57?logo=sqlite&logoColor=white)](https://www.sqlite.org)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Prod-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org)
 
-- Public catalog (categories, products, variants) with filters/search
-- Product detail with compatibility badges + bundle recommendations
-- Cart (guest + authenticated) and checkout (dev/mock Stripe, assisted-revenue attribution)
-- Hybrid inventory: `stocked` (reserve/restock/reorder warnings) and `make_to_order` (engraving, `IN_PRODUCTION`)
-- Order state machine (OPEN → PAID → READY/IN_PRODUCTION → SHIPPED → DELIVERED) with order tracking
-- Admin dashboard (stats, orders, products, low-stock alerts)
-- **Charm Agent**: rule-based guided selling + optional OpenAI tool-calling (search, compatibility, bundles, cart, track)
+</div>
 
-## Quick start (local dev)
+---
+
+## 📦 What is this?
+
+A complete, production-minded **e-commerce application** for selling tableware and serveware.
+It's not a static webpage — it's a **full stack** with a relational database, a REST API,
+an admin panel, order tracking, payment + WhatsApp order notifications, and an AI shopping
+assistant.
+
+> **"Charm"** is the brand's AI table & kitchen assistant. Tell it you're cooking for six on
+> an induction hob and it recommends the right pieces, checks compatibility, and can even
+> add them to the cart.
+
+---
+
+## 🏗️ Monorepo layout
+
+| Path         | Layer          | What it does                                                              |
+|--------------|----------------|---------------------------------------------------------------------------|
+| `shared/`    | `@huwa/shared` | TypeScript domain types + Zod schemas — **single source of truth**        |
+| `backend/`   | API            | Express + TypeScript + Knex ORM (SQLite dev / Postgres prod)              |
+| `frontend/`  | Web app        | React + Vite + Tailwind (storefront, admin, Charm chat widget)            |
+| `agent/`     | AI agent       | Prompts + scaffold for the Charm Agent (logic in `backend/src/services`)  |
+| `infra/`     | Ops            | Docker, nginx reverse proxy, deployment config                            |
+
+---
+
+## ✨ Feature overview
+
+### Customer storefront
+- Public catalog with categories, products, variants, filters, search & sorting
+- Modern responsive product cards with **pricing, sale badges, and quick-add to cart**
+- Product detail with compatibility badges, variant picker, quantity, and bundle offers
+- Cart with free-shipping progress bar (guest **and** authenticated)
+- Checkout → order number → **order tracking** timeline
+- Order confirmations via **WhatsApp**, with SMS (Twilio) fallback
+
+### Charm Agent (AI assistant)
+- Rule-based guided selling out of the box (no API key needed)
+- Optional OpenAI tool-calling when `LLM_API_KEY` is set
+- Tools: product search, compatibility check, bundles, cart, order tracking
+
+### Admin panel
+- Overview stats, order management, product table, low-stock alerts
+- Order state machine: `OPEN → PAID → READY / IN_PRODUCTION → SHIPPED → DELIVERED`
+
+### Inventory
+- Hybrid model: `stocked` (reserve / restock / reorder warnings) and `make_to_order` (engraving)
+
+---
+
+## 🚀 Quick start (local dev)
+
+> **Requires:** Node 18+ and npm.
 
 ```bash
-# shared must be built to JS first (runtime uses dist/)
-cd shared && npm install && npm run build
+# 1. Build the shared package first (runtime uses its compiled JS)
+cd shared
+npm install
+npm run build
 
-# backend
-cd ../backend && npm install
-npm run db:reset   # rollback + migrate + seed
-npm run test       # vitest suite (8 tests)
-npm run dev        # API on http://localhost:4000
+# 2. Backend API
+cd ../backend
+npm install
+npm run db:reset     # rollback + migrate + seed (SQLite dev DB)
+npm test             # vitest suite
+npm run dev          # API on http://localhost:4000
 
-# frontend (new terminal)
-cd ../frontend && npm install
-npm run dev        # app on http://localhost:5173 (proxy -> :4000/api)
+# 3. Frontend (new terminal)
+cd ../frontend
+npm install
+npm run dev          # app on http://localhost:5173 (proxies /api -> :4000)
 ```
 
-### Demo accounts
+Open **http://localhost:5173** 🎉
+
+### 🧑 Demo accounts
 
 | Role     | Email             | Password    |
 |----------|-------------------|-------------|
 | Customer | `demo@huwa.com`   | `Pass1234!` |
 | Admin    | `admin@huwa.com`  | `Pass1234!` |
 
-## Docker (prod-like: Postgres + API + nginx frontend)
+---
+
+## 🐳 Run production-like with Docker
 
 ```bash
 docker compose up --build
 ```
 
-- Frontend: http://localhost:8080 (nginx proxies `/api` → backend)
+- Frontend (nginx): http://localhost:8080 — proxies `/api` → backend
 - API: http://localhost:4000
-- Postgres: localhost:5432 (huwa / huwa_secret / huwa_table_charm)
-- Migrations run automatically on backend start
+- PostgreSQL: localhost:5432 (`huwa` / `huwa_secret` / `huwa_table_charm`)
+- Migrations run automatically on backend startup
 
-## Agent
+---
 
-The Charm Agent is mounted at `/api/agent/chat`. Without `LLM_API_KEY` it runs a deterministic guided-selling flow; set `LLM_API_KEY` (and optionally `LLM_MODEL`) in the backend env to enable OpenAI tool-calling.
+## ⚙️ Configuration
 
-## API reference (summary)
+Copy `backend/.env.example` to `backend/.env` and set what you need:
 
-- `GET /api/products`, `/api/products/:slug`, `/api/categories`, `/api/bundles`
-- Auth: `POST /api/register`, `/login`, `/refresh`, `/logout`, `GET /api/me`
-- Cart: `GET/PUT/DELETE /api/cart`, `POST/PATCH/DELETE /api/cart/items/:id`
-- Checkout: `POST /api/checkout`, `POST /api/checkout/:orderId/confirm`, `GET /api/orders/:orderNumber`, `GET /api/orders/mine`
-- Admin: `/api/admin/*` (auth + role required)
-- Agent: `POST /api/agent/chat`, `GET /api/agent/search`, `/compatibility/:variantId`, `POST /api/agent/bundles`, `/cart`, `GET /api/agent/track/:orderNumber`
+| Variable                  | Purpose                                   |
+|---------------------------|-------------------------------------------|
+| `LLM_API_KEY`             | Enable Charm's OpenAI tool-calling        |
+| `WHATSAPP_PHONE_NUMBER_ID`| Meta WhatsApp Business sender ID           |
+| `WHATSAPP_ACCESS_TOKEN`   | Meta WhatsApp Business access token        |
+| `TWILIO_*`                | SMS fallback if Twilio is preferred        |
+| `STRIPE_SECRET_KEY`       | Real card payments (mock in dev)          |
+
+---
+
+## 🔌 API reference (summary)
+
+| Module    | Endpoints                                                                 |
+|-----------|---------------------------------------------------------------------------|
+| Catalog   | `GET /api/products`, `/api/products/:slug`, `/api/categories`, `/api/bundles` |
+| Auth      | `POST /api/register`, `/login`, `/refresh`, `/logout`, `GET /api/me`       |
+| Cart      | `GET/PUT/DELETE /api/cart`, `POST/PATCH/DELETE /api/cart/items/:id`        |
+| Checkout  | `POST /api/checkout`, `/api/checkout/:orderId/confirm`, `GET /api/orders/:orderNumber`, `GET /api/orders/mine` |
+| Admin     | `/api/admin/*` (auth + role required)                                     |
+| Agent     | `POST /api/agent/chat`, `GET /api/agent/search`, `/compatibility/:variantId`, `POST /api/agent/bundles`, `/cart`, `GET /api/agent/track/:orderNumber` |
+
+---
+
+## 🧪 Tests
+
+```bash
+cd backend && npm test
+```
+
+The suite uses an in-memory SQLite database (`@huwa/shared` + vitest) and covers the core
+auth → cart → checkout → payment → order flow and the agent chat guard.
+
+---
+
+## 📝 License
+
+Private / proprietary. All rights reserved.
