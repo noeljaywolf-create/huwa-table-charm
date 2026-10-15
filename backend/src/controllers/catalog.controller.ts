@@ -27,7 +27,7 @@ export async function getProduct(req: Request, res: Response, next: NextFunction
   try {
     const slug = req.params.slug;
     const product = await catalog.getProductByIdOrSlug(slug);
-    if (!product) throw notFound('Product not found');
+    if (!product || !product.published) throw notFound('Product not found');
     const variants = await catalog.listVariants(product.id);
     const bundles = await catalog.listBundles(true);
     const detail = {

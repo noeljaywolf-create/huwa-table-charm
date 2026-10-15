@@ -1,3 +1,5 @@
+import path from 'node:path';
+import {existsSync} from 'node:fs';
 import express, { type Express } from 'express';
 import cors from 'cors';
 import db from './config/database';
@@ -11,11 +13,13 @@ import checkoutRoutes from './routes/checkout.routes';
 import webhookRoutes from './routes/webhook.routes';
 import agentRoutes from './routes/agent.routes';
 import adminRoutes from './routes/admin.routes';
+import inquiryRoutes from './routes/inquiry.routes';
 
 export function createApp(): Express {
   const app = express();
 
   app.disable('x-powered-by');
+  if (process.env.RENDER === 'true') app.set('trust proxy', 1);
 
   app.use(
     cors({
@@ -24,8 +28,10 @@ export function createApp(): Express {
     }),
   );
 
-  app.use(express.json());
-  app.use(apiLimiter);
+  // Preserve the raw provider signature payload before parsing other JSON.
+  app.use('/api/webhook', webhookRoutes);
+  app.use(express.json({limit:'100kb'}));
+  app.use('/api', apiLimiter);
 
   // Health check
   app.get('/api/health', async (_req, res) => {
@@ -37,9 +43,7 @@ export function createApp(): Express {
     }
   });
 
-  // Stripe webhook must see the raw body, so it is mounted before the JSON parser
-  // is overridden conceptually; it uses its own expr.raw parser inside the route.
-  app.use('/api/webhook', webhookRoutes);
+
 
   app.use('/api', authRoutes);
   app.use('/api', catalogRoutes);
@@ -47,8 +51,15 @@ export function createApp(): Express {
   app.use('/api', checkoutRoutes);
 
   app.use('/api', agentRoutes);
+  app.use('/api', inquiryRoutes);
   app.use('/api', adminRoutes);
 
+  app.use('/api', notFoundHandler);
+  const staticDir = path.resolve(config.staticDir || '../frontend/dist');
+  if (config.env === 'production' && existsSync(path.join(staticDir,'index.html'))) {
+    app.use(express.static(staticDir,{index:false,maxAge:'1h'}));
+    app.get('*',(req,res,next)=>{if(path.extname(req.path))return next();res.setHeader('Cache-Control','no-cache');res.sendFile(path.join(staticDir,'index.html'));});
+  }
   app.use(notFoundHandler);
   app.use(errorHandler);
 
@@ -62,8 +73,20 @@ const isDirectRun =
 
 if (isDirectRun) {
   const app = createApp();
-  app.listen(config.port, () => {
+  const start = async () => {
+    // Prepare beta schema without running the destructive full-catalog seed.
+    if (config.env === 'production' && config.dbDriver === 'sqlite') {
+      await db.migrate.latest();
+      // Catalog imports run explicitly as a release step, never on every startup.
+    }
+    app.listen(config.port, '0.0.0.0', () => {
+      // eslint-disable-next-line no-console
+      console.log(`HUWA TABLE CHARM API listening on http://localhost:${config.port} (${config.env})`);
+    });
+  };
+  start().catch((err) => {
     // eslint-disable-next-line no-console
-    console.log(`HUWA TABLE CHARM API listening on http://localhost:${config.port} (${config.env})`);
+    console.error('Startup failed:', err);
+    process.exit(1);
   });
 }

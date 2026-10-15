@@ -17,11 +17,13 @@ export async function checkout(req: Request, res: Response, next: NextFunction):
   try {
     const { shippingAddress } = req.body;
     const isAssisted = Boolean(req.body.isAssisted);
+    const paymentMethod = req.body.paymentMethod ?? 'card';
     const result = await orderService.createOrderFromCart(
       resolveUser(req),
       resolveAnonymous(req),
       shippingAddress,
       isAssisted,
+      paymentMethod,
     );
     res.status(201).json({ success: true, data: result });
   } catch (e) {

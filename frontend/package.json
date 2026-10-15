@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "build": "node tools/copy-three.mjs && tsc --noEmit && vite build",
+    "postinstall": "node tools/copy-three.mjs",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "lint": "echo \"no lint configured yet\" && exit 0"
@@ -13,7 +14,8 @@
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.26.0"
+    "react-router-dom": "^6.26.0",
+    "three": "0.160.1"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",

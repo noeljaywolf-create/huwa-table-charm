@@ -34,3 +34,11 @@ Thumbs.db
 # ===== Misc =====
 coverage/
 *.log/
+
+# Launch secrets and local QA artifacts
+.env.*
+!.env.example
+!.env.production.example
+*.db-*
+/integrated-*.png
+/check-integration.mjs

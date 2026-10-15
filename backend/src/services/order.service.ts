@@ -1,3 +1,4 @@
+import {assertPurchasable} from './purchase-guard';
 import { v4 as uuid } from 'uuid';
 import db from '../config/database';
 import { getCart } from './cart.service';
@@ -22,6 +23,7 @@ interface OrderRow {
   shipping_option: unknown;
   is_assisted: boolean;
   payment_intent_id: string | null;
+  payment_method: 'card' | 'whatsapp' | 'bank' | 'ecocash' | null;
   created_at: string;
   updated_at: string;
 }
@@ -80,6 +82,7 @@ export async function createOrderFromCart(
   anonymousId: string,
   shippingAddress: Record<string, string>,
   isAssisted = false,
+  paymentMethod: 'card' | 'whatsapp' | 'bank' | 'ecocash' = 'card',
 ): Promise<{ order: OrderDto; paymentIntentSecret: string }> {
   // If user is logged in, merge any anonymous cart into their user cart
   if (userId) {
@@ -97,6 +100,7 @@ export async function createOrderFromCart(
   for (const item of cart.items) {
     const variant = await db('variants').where({ id: item.variantId }).first();
     if (!variant) throw badRequest('Cart contains an outdated item');
+    await assertPurchasable(variant.product_id);
     lineData.push({ variant, quantity: item.quantity, unitCents: Number(variant.price_cents) });
     shippingLines.push({
       weightKg: Number(variant.weight_kg),
@@ -126,6 +130,7 @@ export async function createOrderFromCart(
     shipping_option: JSON.stringify(quote),
     is_assisted: isAssisted,
     payment_intent_id: null,
+    payment_method: paymentMethod,
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   };
@@ -283,7 +288,7 @@ export async function listOrdersByUser(userId: string, email?: string): Promise<
   let query = db('orders').where(function () {
     this.where('user_id', userId);
     if (email) {
-      this.orWhereRaw("json_extract(shipping_address, '$.email') = ?", [email]);
+      this.orWhereRaw(db.client.config.client === 'pg' ? "shipping_address->>'email' = ?" : "json_extract(shipping_address, '$.email') = ?", [email]);
     }
   }).orderBy('created_at', 'desc');
   const rows = await query;
@@ -336,6 +341,7 @@ async function composeOrder(row: OrderRow): Promise<OrderDto> {
     currency: row.currency,
     shippingAddress: JSON.parse((row.shipping_address as string) || '{}'),
     isAssisted: Boolean(row.is_assisted),
+    paymentMethod: row.payment_method ?? null,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
     events: events.map((e) => toOrderEvent(e)),

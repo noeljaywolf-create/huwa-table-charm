@@ -86,6 +86,7 @@ export const checkoutSchema = z.object({
   }),
   shippingOption: z.string().optional(),
   isAssisted: z.boolean().optional(),
+  paymentMethod: z.enum(['card', 'whatsapp', 'bank', 'ecocash']).optional(),
 });
 
 export const orderStateUpdateSchema = z.object({

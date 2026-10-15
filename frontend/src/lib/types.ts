@@ -44,6 +44,7 @@ export interface Category {
   id: string;
   slug: string;
   name: string;
+  title?: string;
   description?: string;
   image?: string | null;
 }

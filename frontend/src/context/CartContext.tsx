@@ -54,7 +54,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const add = useCallback(async (variantId: string, quantity = 1) => {
     const anon = getAnonymousId();
     const res = await api.post<Cart>(`/cart/items?anonymousId=${encodeURIComponent(anon)}`, { variantId, quantity });
-    if (res.success && res.data) setCart(res.data);
+    if (!res.success || !res.data) throw new Error(res.error || 'Could not add this item to your cart');
+    setCart(res.data);
   }, []);
 
   const updateQuantity = useCallback(async (itemId: string, quantity: number) => {

@@ -1,10 +1,13 @@
+import KitchenRoom from '../components/KitchenRoom';
+import catalog from '../lib/tableCharmCatalog.json';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { api } from '../lib/api';
 import ProductCard from '../components/ProductCard';
 import type { Category, ListResult, Product } from '../lib/types';
 
-const PRODUCT_TYPES = ['cookware', 'tableware', 'drinkware', 'bakeware', 'flatware', 'utensils', 'storage'];
+const PRODUCT_TYPES = ['cookware', 'tableware', 'drinkware', 'bakeware', 'flatware', 'utensils', 'storage', 'appliances'];
+const PAGE_SIZE = 24;
 
 function FilterGroup({ title, options, selected, onSelect }: {
   title: string;
@@ -35,8 +38,10 @@ function FilterGroup({ title, options, selected, onSelect }: {
 export default function Shop() {
   const [params, setParams] = useSearchParams();
   const [categories, setCategories] = useState<Category[]>([]);
-  const [result, setResult] = useState<ListResult<Product>>({ items: [], total: 0, page: 1, pageSize: 24 });
+  const [items, setItems] = useState<Product[]>([]);
+  const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
   const [mobileFilters, setMobileFilters] = useState(false);
 
   const category = params.get('category') ?? '';
@@ -44,29 +49,60 @@ export default function Shop() {
   const type = params.get('type') ?? '';
   const sort = params.get('sort') ?? '';
 
-  useEffect(() => {
-    (async () => {
-      const c = await api.get<Category[]>('/categories');
-      if (c.success && c.data) setCategories(c.data);
-    })();
-  }, []);
+  // Track loaded page count locally (backend doesn't echo it back)
+  const [loadedPages, setLoadedPages] = useState(0);
+  const hasMore = items.length < total;
 
   useEffect(() => {
     (async () => {
+      const c = await api.get<Category[]>('/categories');
+      if (c.success && c.data) setCategories(c.data.filter(c=>catalog.some(p=>p.category===c.slug)));
+    })();
+  }, []);
+
+  // Initial fetch — resets on any filter/search change
+  useEffect(() => {
+    (async () => {
       setLoading(true);
+      setItems([]);
+      setTotal(0);
+      setLoadedPages(0);
       const query = new URLSearchParams();
       if (category) query.set('category', category);
       if (q) query.set('q', q);
       if (type) query.set('productType', type);
-      query.set('pageSize', '48');
+      query.set('pageSize', String(PAGE_SIZE));
+      query.set('page', '1');
       const res = await api.get<ListResult<Product>>(`/products?${query.toString()}`);
-      if (res.success && res.data) setResult(res.data);
+      if (res.success && res.data) {
+        setItems(res.data.items);
+        setTotal(res.data.total);
+        setLoadedPages(1);
+      }
       setLoading(false);
     })();
   }, [category, q, type]);
 
-  // Client-side sort (backend returns newest first)
-  const sorted = [...result.items];
+  const loadMore = async () => {
+    if (!hasMore || loadingMore) return;
+    setLoadingMore(true);
+    const nextPage = loadedPages + 1;
+    const query = new URLSearchParams();
+    if (category) query.set('category', category);
+    if (q) query.set('q', q);
+    if (type) query.set('productType', type);
+    query.set('pageSize', String(PAGE_SIZE));
+    query.set('page', String(nextPage));
+    const res = await api.get<ListResult<Product>>(`/products?${query.toString()}`);
+    if (res.success && res.data) {
+      setItems((prev) => [...prev, ...res.data!.items]);
+      setLoadedPages(nextPage);
+    }
+    setLoadingMore(false);
+  };
+
+  // Client-side sort (backend returns newest first; price/sale sort only over current loaded set)
+  const sorted = [...items];
   if (sort === 'price-asc') sorted.sort((a, b) => (a.price ?? 0) - (b.price ?? 0));
   else if (sort === 'price-desc') sorted.sort((a, b) => (b.price ?? 0) - (a.price ?? 0));
   else if (sort === 'sale') sorted.sort((a, b) => Number((b.compareAtPrice ?? 0) > 0) - Number((a.compareAtPrice ?? 0) > 0));
@@ -88,7 +124,7 @@ export default function Shop() {
       </div>
       <FilterGroup
         title="Category"
-        options={[{ value: '', label: 'All categories' }, ...categories.map((c) => ({ value: c.slug, label: c.name }))]}
+        options={[{ value: '', label: 'All categories' }, ...categories.map((c) => ({ value: c.slug, label: c.title || c.name }))]}
         selected={category}
         onSelect={(v) => setParam('category', v)}
       />
@@ -113,26 +149,31 @@ export default function Shop() {
   );
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+    <>
+      {!category && !q && !type && <KitchenRoom compact/>}
+      <div className="container-page py-8 md:py-12">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
         <div>
-          <h1 className="font-display text-3xl font-semibold text-stone-900">
-            {category ? categories.find((c) => c.slug === category)?.name ?? 'Shop' : 'All products'}
+          <div className="eyebrow">Collection</div>
+          <h1 className="font-display text-3xl md:text-4xl font-semibold text-stone-900 mt-1">
+            {category ? categories.find((c) => c.slug === category)?.title ?? categories.find((c) => c.slug === category)?.name ?? 'Shop' : 'The whole kitchen'}
           </h1>
-          <p className="text-sm text-stone-500 mt-1">{loading ? 'Loading…' : `${result.total} product(s)`}</p>
+          <p className="text-sm text-stone-500 mt-1.5">
+            {loading ? 'Loading…' : items.length === total ? `${total} product${total !== 1 ? 's' : ''}` : `Showing ${items.length} of ${total} product${total !== 1 ? 's' : ''}`}
+          </p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 w-full md:w-auto">
           <form
             onSubmit={(e) => { e.preventDefault(); const v = (e.currentTarget.elements.namedItem('q') as HTMLInputElement).value; setParam('q', v); }}
-            className="flex flex-1 md:flex-none gap-2"
+            className="flex flex-1 gap-2"
           >
             <input
               name="q"
               defaultValue={q}
               placeholder="Search products…"
-              className="input w-full md:w-64"
+              className="input"
             />
-            <button className="btn-primary !px-3.5" aria-label="Search">
+            <button className="btn-primary !px-3.5 shrink-0" aria-label="Search">
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35M17 10.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z" /></svg>
             </button>
           </form>
@@ -146,6 +187,7 @@ export default function Shop() {
         </div>
       </div>
 
+      <div className="kitchen-shop-chips" aria-label="Kitchen collections"><button className={!category&&!q?'is-active':''} onClick={()=>setParams({})}>All the lovely things</button>{[{slug:'cookware',name:'Pots & pans'},{slug:'appliances',name:'Kettles & toasters'},{slug:'storage',name:'Colourful storage'},{slug:'serveware',name:'Serve & share'},{slug:'dinnerware',name:'Dinnerware'},{slug:'drinkware',name:'Glassware'},{slug:'flatware',name:'Cutlery'},{slug:'utensils',name:'Kitchen tools'}].map(c=><button key={c.slug} className={category===c.slug?'is-active':''} onClick={()=>setParams({category:c.slug})}>{c.name}</button>)}</div>
       <div className="flex gap-8">
         {/* Desktop sidebar */}
         <aside className="hidden md:block w-56 shrink-0 sticky top-24 self-start max-h-[calc(100vh-120px)] overflow-y-auto pr-2 py-2">
@@ -183,14 +225,36 @@ export default function Shop() {
               <button onClick={() => setParams({})} className="btn-secondary mt-4">Clear filters</button>
             </div>
           ) : (
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-              {sorted.map((p) => (
-                <ProductCard key={p.id} product={p} />
-              ))}
-            </div>
+            <>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+                {sorted.map((p, i) => (
+                  <ProductCard key={p.id} product={p} index={i} />
+                ))}
+              </div>
+
+              {hasMore && (
+                <div className="mt-10 text-center">
+                  <button
+                    onClick={loadMore}
+                    disabled={loadingMore}
+                    className="btn-secondary inline-flex items-center gap-2 disabled:opacity-50"
+                  >
+                    {loadingMore ? (
+                      <>
+                        <span className="h-4 w-4 rounded-full border-2 border-stone-300 border-t-stone-600 animate-spin" />
+                        Loading…
+                      </>
+                    ) : (
+                      'Load more'
+                    )}
+                  </button>
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>
     </div>
+    </>
   );
 }

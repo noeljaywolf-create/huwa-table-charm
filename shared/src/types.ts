@@ -118,6 +118,7 @@ export interface OrderDto {
   currency: string;
   shippingAddress: Record<string, string>;
   isAssisted: boolean;
+  paymentMethod: 'card' | 'whatsapp' | 'bank' | 'ecocash' | null;
   createdAt: string;
   updatedAt: string;
   events: OrderEventDto[];

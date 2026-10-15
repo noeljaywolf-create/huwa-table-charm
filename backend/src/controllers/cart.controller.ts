@@ -53,3 +53,10 @@ export async function clearCart(req: Request, res: Response, next: NextFunction)
     next(e);
   }
 }
+
+export async function addBatch(req: Request, res: Response, next: NextFunction): Promise<void> {
+  try {
+    const data = await cartService.addBatch(resolveUser(req), resolveAnonymous(req), req.body.items);
+    res.status(201).json({ success: true, data });
+  } catch (e) { next(e); }
+}

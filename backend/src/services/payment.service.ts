@@ -32,6 +32,7 @@ export async function createIntent(
   isAssisted: boolean,
 ): Promise<PaymentIntentResult> {
   if (!stripe) {
+    if (config.env === 'production') throw notFound('Card payments are not configured');
     // Deterministic dev fallback so the whole flow can be tested locally.
     const intentId = `mock_${orderId}`;
     return { intentId, clientSecret: `pi_mock_${orderId}_secret` };
@@ -51,6 +52,7 @@ export async function createIntent(
  * Stripe webhook (handleWebhook) rather than a direct call.
  */
 export async function confirmPayment(orderId: string): Promise<void> {
+  if(config.env === 'production') throw notFound('Payment confirmation requires the payment provider webhook');
   await db('payments').insert({
     id: uuid(),
     order_id: orderId,

@@ -1,3 +1,4 @@
+import {assertPurchasable} from './purchase-guard';
 import { v4 as uuid } from 'uuid';
 import db from '../config/database';
 import { toVariant, toCents, cents, type VariantRow } from './catalog.mapper';
@@ -92,6 +93,7 @@ export async function addItem(
   quantity = 1,
 ): Promise<CartDto> {
   const variant = await ensureVariantExists(variantId);
+  await assertPurchasable(variant.productId);
   const cart = await getOrCreateCart(userId, anonymousId);
 
   // Enforce stock availability for stocked variants
@@ -133,6 +135,32 @@ export async function updateItem(
     await db('cart_items').where({ id: itemId }).update({ quantity });
   }
   return composeCart(await db('carts').where({ id: cart.id }).first() as CartRow);
+}
+
+/** Add a complete setting atomically; prices always come from catalog rows. */
+export async function addBatch(userId: string | null, anonymousId: string, items: { variantId: string; quantity: number }[]): Promise<CartDto> {
+  const cart = await getOrCreateCart(userId, anonymousId);
+  const combined = new Map<string, number>();
+  for (const item of items) combined.set(item.variantId, (combined.get(item.variantId) || 0) + item.quantity);
+  await db.transaction(async trx => {
+    for (const [variantId, quantity] of combined) {
+      if (!Number.isInteger(quantity) || quantity < 1 || quantity > 100) throw badRequest('Invalid quantity');
+      const variant = await trx('variants').where({ id: variantId }).first();
+      if (!variant) throw badRequest('A selected variant is unavailable');
+      const product = await trx('products').where({ id: variant.product_id }).first();
+      if (!product?.published) throw badRequest('A selected product is unavailable');
+      if (JSON.parse(typeof product.features === 'string' ? product.features : JSON.stringify(product.features || {})).requires_quote) throw badRequest('Request a confirmed local price before ordering this product');
+      const existing = await trx('cart_items').where({ cart_id: cart.id, variant_id: variantId }).first();
+      const nextQuantity = (existing?.quantity || 0) + quantity;
+      if (variant.fulfilment_mode === 'stocked') {
+        const stock = await trx('inventory_stock').where({ variant_id: variantId }).first();
+        if (nextQuantity > Number(stock?.sellable ?? variant.stock ?? 0)) throw badRequest('Insufficient stock available');
+      }
+      if (existing) await trx('cart_items').where({ id: existing.id }).update({ quantity: nextQuantity });
+      else await trx('cart_items').insert({ id: uuid(), cart_id: cart.id, variant_id: variantId, quantity });
+    }
+  });
+  return getCart(userId, anonymousId);
 }
 
 export async function clearCart(userId: string | null, anonymousId: string): Promise<void> {

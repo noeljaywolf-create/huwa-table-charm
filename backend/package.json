@@ -8,19 +8,22 @@
   "scripts": {
     "dev": "nodemon --exec tsx src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js",
+    "start": "tsx src/server.ts",
     "typecheck": "tsc --noEmit",
     "migrate": "tsx src/scripts/knex-cli.ts migrate",
     "migrate:rollback": "tsx src/scripts/knex-cli.ts rollback",
     "seed": "tsx src/scripts/knex-cli.ts seed",
+    "catalog:petal-pearl": "tsx src/scripts/petal-pearl.ts",
     "db:reset": "tsx src/scripts/knex-cli.ts rollback --all && tsx src/scripts/knex-cli.ts migrate && tsx src/scripts/knex-cli.ts seed",
     "test": "vitest run",
-    "lint": "echo \"no lint configured yet\" && exit 0"
+    "lint": "echo \"no lint configured yet\" && exit 0",
+    "catalog:release": "tsx src/scripts/release-catalog.ts",
+    "admin:create": "tsx src/scripts/create-admin.ts"
   },
   "dependencies": {
     "@huwa/shared": "file:../shared",
     "bcryptjs": "^2.4.3",
-    "better-sqlite3": "^13.0.3",
+    "better-sqlite3": "12.11.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",

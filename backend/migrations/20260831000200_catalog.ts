@@ -14,7 +14,7 @@ export async function up(knex: Knex): Promise<void> {
     table.string('title').notNullable();
     table.string('slug').notNullable().unique();
     table.text('description').notNullable();
-    table.string('category_id').nullable().references('id').inTable('categories').onDelete('SET NULL');
+    table.uuid('category_id').nullable().references('id').inTable('categories').onDelete('SET NULL');
     table.string('material').notNullable();
     // features stored as JSON: { induction_compatible, microwave_safe, ... }
     table.json('features').notNullable();

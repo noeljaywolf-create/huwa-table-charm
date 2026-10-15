@@ -22,6 +22,7 @@ import type {
   ProductFeature,
 } from '@huwa/shared';
 
+const isUuid=(value:string)=>/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
 // ---------- Categories ----------
 export async function listCategories(): Promise<CategoryDto[]> {
   const rows = await db('categories').select('*').orderBy('title');
@@ -41,7 +42,7 @@ export async function createProduct(input: ProductCreateInput): Promise<ProductD
 
   // Resolve the category by id or slug (input.category is the CategoryDto id/slug)
   let categoryId = input.category;
-  const category = await db('categories').where({ id: categoryId }).orWhere({ slug: categoryId }).first();
+  const category = await db('categories').where(isUuid(categoryId)?{id:categoryId}:{slug:categoryId}).first();
   if (!category) throw badRequest('Unknown category');
   categoryId = category.id;
 
@@ -66,8 +67,7 @@ export async function createProduct(input: ProductCreateInput): Promise<ProductD
 
 export async function getProductByIdOrSlug(identifier: string): Promise<ProductDto | null> {
   const row = await db('products')
-    .where({ id: identifier })
-    .orWhere({ slug: identifier })
+    .where(isUuid(identifier)?{id:identifier}:{slug:identifier})
     .first();
   return row ? toProduct(row as ProductRow) : null;
 }
@@ -83,13 +83,13 @@ export async function listProducts(params: {
   page?: number;
   pageSize?: number;
 }): Promise<{ items: ProductDto[]; total: number }> {
-  const page = params.page ?? 1;
-  const pageSize = params.pageSize ?? 24;
+  const page = Math.max(1, Math.floor(params.page || 1));
+  const pageSize = Math.min(100, Math.max(1, Math.floor(params.pageSize || 24)));
 
   // Resolve category by slug OR id (the API surface uses slugs; internally category_id is a UUID)
   let categoryId: string | undefined;
   if (params.category) {
-    const cat = await db('categories').where({ id: params.category }).orWhere({ slug: params.category }).first();
+    const cat = await db('categories').where(isUuid(params.category)?{id:params.category}:{slug:params.category}).first();
     categoryId = cat?.id;
     if (!categoryId) return { items: [], total: 0 };
   }
@@ -104,11 +104,11 @@ export async function listProducts(params: {
       if (tokens.length > 1) {
         qb.where((inner: any) => {
           for (const tok of tokens) {
-            inner.orWhereILike('title', `%${tok}%`).orWhereILike('description', `%${tok}%`);
+            inner.orWhereRaw('LOWER(title) LIKE ?', [`%${tok.toLowerCase()}%`]).orWhereRaw('LOWER(description) LIKE ?', [`%${tok.toLowerCase()}%`]);
           }
         });
       } else if (tokens.length === 1) {
-        qb.whereILike('title', `%${tokens[0]}%`).orWhereILike('description', `%${tokens[0]}%`);
+        qb.where((inner:any)=>inner.whereRaw('LOWER(title) LIKE ?', [`%${tokens[0].toLowerCase()}%`]).orWhereRaw('LOWER(description) LIKE ?', [`%${tokens[0].toLowerCase()}%`]));
       }
     }
   };
@@ -118,7 +118,8 @@ export async function listProducts(params: {
 
   let rows = await db('products')
     .modify(base)
-    .orderBy('created_at', 'desc')
+    .orderByRaw('ROW_NUMBER() OVER (PARTITION BY category_id ORDER BY created_at DESC, title ASC)')
+    .orderBy('title', 'asc')
     .limit(pageSize)
     .offset((page - 1) * pageSize);
 

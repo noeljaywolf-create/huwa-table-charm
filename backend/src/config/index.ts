@@ -6,6 +6,10 @@ dotenv.config();
 const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
   PORT: z.coerce.number().default(4000),
+  DB_DRIVER: z.enum(['postgres', 'sqlite']).optional(),
+  DB_PATH: z.string().optional(),
+  DATABASE_URL: z.string().optional(),
+  STATIC_DIR: z.string().optional(),
   DB_HOST: z.string().default('127.0.0.1'),
   DB_PORT: z.coerce.number().default(5432),
   DB_NAME: z.string().default('huwa_table_charm'),
@@ -30,10 +34,15 @@ if (!parsed.success) {
   throw new Error('Invalid environment configuration');
 }
 
+if(parsed.data.NODE_ENV==='production'){for(const key of ['JWT_SECRET','JWT_REFRESH_SECRET'] as const){const value=process.env[key];if(!value||value.length<32||/change-me|huwa-dev/.test(value))throw new Error(key+' must be a unique production secret of at least 32 characters');}if(process.env.JWT_SECRET===process.env.JWT_REFRESH_SECRET)throw new Error('Production JWT secrets must differ');}
 export const config = {
   env: parsed.data.NODE_ENV,
   port: parsed.data.PORT,
+  dbDriver: parsed.data.DB_DRIVER,
+  dbPath: parsed.data.DB_PATH,
+  staticDir: parsed.data.STATIC_DIR,
   db: {
+    url: parsed.data.DATABASE_URL,
     host: parsed.data.DB_HOST,
     port: parsed.data.DB_PORT,
     name: parsed.data.DB_NAME,
