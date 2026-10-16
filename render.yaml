@@ -1,4 +1,4 @@
-# Review the paid resources before creating this Blueprint.
+# Free testing blueprint (web free + db free). Free DB expires 30 days after creation.
 services:
   - type: web
     name: huwa
