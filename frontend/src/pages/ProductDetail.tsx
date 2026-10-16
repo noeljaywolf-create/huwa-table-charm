@@ -1,4 +1,5 @@
 import catalog from '../lib/tableCharmCatalog.json';
+import photoCredits from '../lib/photoCredits.json';
 import ShopModelViewer from '../components/ShopModelViewer';
 import {modeledShopProducts} from '../lib/shopModels';
 import CollectionViewer, {type CharmObject, type CharmFinish} from '../components/CollectionViewer';
@@ -28,6 +29,7 @@ export default function ProductDetailPage() {
   const [qty, setQty] = useState(1);
   const [adding, setAdding] = useState(false);
   const [failed,setFailed]=useState(false);
+  const [activeIdx, setActiveIdx] = useState(0);
 
   useEffect(() => {
     (async () => {
@@ -35,6 +37,7 @@ export default function ProductDetailPage() {
       if (res.success && res.data) {
         setProduct(res.data);
         setSelected(res.data.variants[0] ?? null);
+        setActiveIdx(0);
       } else {setFailed(true);
       }
     })();
@@ -47,8 +50,11 @@ export default function ProductDetailPage() {
   const reference=catalog.find(p=>p.slug===product.slug);
   const isSale = selected?.compareAtPrice != null && selected.price < selected.compareAtPrice;
   const discount = isSale ? Math.round((1 - selected.price / selected.compareAtPrice!) * 100) : 0;
-  const image = selected?.image || product.images[0];
+  const gallery = selected?.image ? [selected.image, ...product.images.filter(i => i !== selected.image)] : product.images;
+  const activeSrc = gallery[Math.min(activeIdx, gallery.length - 1)] || product.images[0];
+  const activeCredit = (photoCredits as Record<string, { alt: string; photographer: string; sourceUrl: string }>)[activeSrc];
   const hasStock = selected ? selected.stock !== 0 : true;
+  const isViewer = modeledShopProducts.has(product.slug) || product.tags.includes('petal-pearl');
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-12">
@@ -62,10 +68,26 @@ export default function ProductDetailPage() {
 
       <div className="grid lg:grid-cols-2 gap-10">
         {/* Gallery */}
-        <div className="card overflow-hidden">
-          <div className="aspect-square">
-            {modeledShopProducts.has(product.slug) ? <ShopModelViewer product={product} variant={selected}/> : product.tags.includes('petal-pearl') ? <CollectionViewer object={({ 'bloom-carafe': 'pitcher', 'ribbon-cup': 'cup', 'petal-bowl': 'bowl', 'pearl-plate': 'plate' } as Record<string, CharmObject>)[product.slug]} finish={(selected?.options.finish || 'kiln') as CharmFinish} /> : <ProductImage src={image} alt={product.title} className="w-full h-full" />}
+        <div>
+          <div className="card overflow-hidden">
+            <div className="aspect-square">
+              {modeledShopProducts.has(product.slug) ? <ShopModelViewer product={product} variant={selected}/> : product.tags.includes('petal-pearl') ? <CollectionViewer object={({ 'bloom-carafe': 'pitcher', 'ribbon-cup': 'cup', 'petal-bowl': 'bowl', 'pearl-plate': 'plate' } as Record<string, CharmObject>)[product.slug]} finish={(selected?.options.finish || 'kiln') as CharmFinish} /> : <ProductImage src={activeSrc} alt={activeCredit?.alt || product.title} className="w-full h-full" />}
+            </div>
           </div>
+          {!isViewer && gallery.length > 1 && (
+            <div className="mt-3">
+              <div className="flex gap-2 overflow-x-auto pb-1">
+                {gallery.map((src, i) => (
+                  <button key={src + i} onClick={() => setActiveIdx(i)} aria-label={`View photo ${i + 1}`} className={`h-16 w-16 shrink-0 overflow-hidden rounded-lg border-2 transition ${i === Math.min(activeIdx, gallery.length - 1) ? 'border-teal-700' : 'border-transparent hover:border-stone-300'}`}>
+                    <img src={src} alt="" loading="lazy" className="h-full w-full object-cover" />
+                  </button>
+                ))}
+              </div>
+              {activeCredit && (
+                <p className="mt-1.5 text-xs text-stone-400">Styling inspiration · photo by {activeCredit.photographer} via <a href={activeCredit.sourceUrl} target="_blank" rel="noreferrer" className="underline hover:text-teal-700">Pexels</a></p>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Info */}

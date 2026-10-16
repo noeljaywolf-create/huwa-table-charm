@@ -601,7 +601,21 @@
         "sourceAvailability":  "not-confirmed",
         "localPriceUsd":  null,
         "localStock":  null,
-        "color":  "teal"
+        "color":  "teal",
+        "lifestyleImages":  [
+                                {
+                                    "photographer":  "damir",
+                                    "alt":  "A sleek and modern kitchen interior with blue cabinets and a bowl of fruit on the countertop",
+                                    "sourceUrl":  "https://www.pexels.com/photo/interior-of-a-modern-kitchen-with-blue-cabinets-21765129/",
+                                    "src":  "/inspiration/kitchens/kx-21765129.jpg"
+                                },
+                                {
+                                    "photographer":  "fotoaibe",
+                                    "alt":  "Sleek Scandinavian-style kitchen with wooden elements and minimalistic decor in a modern apartment",
+                                    "sourceUrl":  "https://www.pexels.com/photo/interior-design-of-dining-area-10758468/",
+                                    "src":  "/inspiration/kitchens/kx-10758468.jpg"
+                                }
+                            ]
     },
     {
         "slug":  "tc-kettle-17lt-red",
@@ -620,7 +634,21 @@
         "sourceAvailability":  "not-confirmed",
         "localPriceUsd":  null,
         "localStock":  null,
-        "color":  "cherry"
+        "color":  "cherry",
+        "lifestyleImages":  [
+                                {
+                                    "photographer":  "edithubpro",
+                                    "alt":  "Modern kitchen with dark wood cabinets and marble countertops, emphasizing elegant interior design",
+                                    "sourceUrl":  "https://www.pexels.com/photo/luxury-kitchen-in-a-house-18285887/",
+                                    "src":  "/inspiration/kitchens/kx-18285887.jpg"
+                                },
+                                {
+                                    "photographer":  "artbovich",
+                                    "alt":  "Stylish contemporary kitchen featuring wooden accents and modern appliances",
+                                    "sourceUrl":  "https://www.pexels.com/photo/view-of-a-kitchen-6908565/",
+                                    "src":  "/inspiration/kitchens/kx-6908565.jpg"
+                                }
+                            ]
     },
     {
         "slug":  "tc-kettle-17lt-cream",
@@ -639,7 +667,21 @@
         "sourceAvailability":  "not-confirmed",
         "localPriceUsd":  null,
         "localStock":  null,
-        "color":  "cream"
+        "color":  "cream",
+        "lifestyleImages":  [
+                                {
+                                    "photographer":  "alesha-260500796",
+                                    "alt":  "A bright and spacious modern kitchen with white cabinets, appliances, and natural light",
+                                    "sourceUrl":  "https://www.pexels.com/photo/the-interior-of-a-kitchen-of-a-house-13009887/",
+                                    "src":  "/inspiration/kitchens/kx-13009887.jpg"
+                                },
+                                {
+                                    "photographer":  "readymade",
+                                    "alt":  "Stylish kitchen setup with glass jars, wooden accents, and a white electric kettle. Ideal for organization",
+                                    "sourceUrl":  "https://www.pexels.com/photo/brown-powder-in-clear-glass-jars-3847442/",
+                                    "src":  "/catalog/lifestyle/px-3847442.jpg"
+                                }
+                            ]
     },
     {
         "slug":  "tc-2-slice-toaster-teal",
@@ -658,7 +700,21 @@
         "sourceAvailability":  "not-confirmed",
         "localPriceUsd":  null,
         "localStock":  null,
-        "color":  "teal"
+        "color":  "teal",
+        "lifestyleImages":  [
+                                {
+                                    "photographer":  "damir",
+                                    "alt":  "A sleek and modern kitchen interior with blue cabinets and a bowl of fruit on the countertop",
+                                    "sourceUrl":  "https://www.pexels.com/photo/interior-of-a-modern-kitchen-with-blue-cabinets-21765129/",
+                                    "src":  "/inspiration/kitchens/kx-21765129.jpg"
+                                },
+                                {
+                                    "photographer":  "artbovich",
+                                    "alt":  "Interior of kitchen with minimalist glossy furniture and modern appliances in light contemporary apartment",
+                                    "sourceUrl":  "https://www.pexels.com/photo/modern-appliances-and-furniture-in-light-kitchen-6527057/",
+                                    "src":  "/inspiration/kitchens/kx-6527057.jpg"
+                                }
+                            ]
     },
     {
         "slug":  "tc-2-slice-toaster-red",
@@ -677,7 +733,21 @@
         "sourceAvailability":  "not-confirmed",
         "localPriceUsd":  null,
         "localStock":  null,
-        "color":  "cherry"
+        "color":  "cherry",
+        "lifestyleImages":  [
+                                {
+                                    "photographer":  "edithubpro",
+                                    "alt":  "Modern kitchen with dark wood cabinets and marble countertops, emphasizing elegant interior design",
+                                    "sourceUrl":  "https://www.pexels.com/photo/luxury-kitchen-in-a-house-18285887/",
+                                    "src":  "/inspiration/kitchens/kx-18285887.jpg"
+                                },
+                                {
+                                    "photographer":  "artbovich",
+                                    "alt":  "Stylish kitchen interior featuring wooden cabinets, black accents, and modern appliances",
+                                    "sourceUrl":  "https://www.pexels.com/photo/an-interior-of-a-modern-kitchen-counter-7045356/",
+                                    "src":  "/inspiration/kitchens/kx-7045356.jpg"
+                                }
+                            ]
     },
     {
         "slug":  "tc-2-slice-toaster-cream",
@@ -696,7 +766,21 @@
         "sourceAvailability":  "not-confirmed",
         "localPriceUsd":  null,
         "localStock":  null,
-        "color":  "cream"
+        "color":  "cream",
+        "lifestyleImages":  [
+                                {
+                                    "photographer":  "alesha-260500796",
+                                    "alt":  "A bright and spacious modern kitchen with white cabinets, appliances, and natural light",
+                                    "sourceUrl":  "https://www.pexels.com/photo/the-interior-of-a-kitchen-of-a-house-13009887/",
+                                    "src":  "/inspiration/kitchens/kx-13009887.jpg"
+                                },
+                                {
+                                    "photographer":  "marcus-80608062",
+                                    "alt":  "Sleek modern kitchen design featuring a sunlit countertop and large windows for a bright interior",
+                                    "sourceUrl":  "https://www.pexels.com/photo/countertop-of-modern-kitchen-18033166/",
+                                    "src":  "/inspiration/kitchens/kx-18033166.jpg"
+                                }
+                            ]
     },
     {
         "slug":  "tc-3pc-bowl-set-and-lids-teal-125lt-25lt-5lt",
