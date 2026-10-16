@@ -13,7 +13,6 @@
   },
   "scripts": {
     "build": "tsc",
-    "prepare": "tsc",
     "prepublishOnly": "tsc",
     "typecheck": "tsc --noEmit",
     "lint": "echo \"no lint configured yet\" && exit 0"
