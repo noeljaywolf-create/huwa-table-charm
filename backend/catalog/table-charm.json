@@ -478,7 +478,27 @@
         "sourceAvailability":  "not-confirmed",
         "localPriceUsd":  null,
         "localStock":  null,
-        "color":  "steel"
+        "color":  "steel",
+        "lifestyleImages":  [
+                                {
+                                    "photographer":  "timmossholder",
+                                    "alt":  "Array of shiny stainless steel pots stacked in a kitchen setting",
+                                    "sourceUrl":  "https://www.pexels.com/photo/stack-of-stainless-steel-cooking-pots-in-kitchen-28726706/",
+                                    "src":  "/catalog/lifestyle/px-28726706.jpg"
+                                },
+                                {
+                                    "photographer":  "cihanyuce",
+                                    "alt":  "Stainless steel kitchen utensils hanging in a modern kitchen setting with blurred background",
+                                    "sourceUrl":  "https://www.pexels.com/photo/utensils-hanging-in-kitchen-12181753/",
+                                    "src":  "/catalog/lifestyle/px-12181753.jpg"
+                                },
+                                {
+                                    "photographer":  "bruno-makori-774974101",
+                                    "alt":  "Stainless steel commercial kitchen setup with pots, strainers, and utensils hanging on a rail",
+                                    "sourceUrl":  "https://www.pexels.com/photo/commercial-kitchen-with-stainless-steel-equipment-28704740/",
+                                    "src":  "/catalog/lifestyle/px-28704740.jpg"
+                                }
+                            ]
     },
     {
         "slug":  "tc-20cm-stainless-steel-stock-pot-5lt",
@@ -497,7 +517,33 @@
         "sourceAvailability":  "not-confirmed",
         "localPriceUsd":  null,
         "localStock":  null,
-        "color":  "steel"
+        "color":  "steel",
+        "lifestyleImages":  [
+                                {
+                                    "photographer":  "merve-205352359",
+                                    "alt":  "Close-up of a stainless steel pot in a bright kitchen, perfect for cooking and kitchenware themes",
+                                    "sourceUrl":  "https://www.pexels.com/photo/aluminium-cover-on-pot-18789103/",
+                                    "src":  "/catalog/lifestyle/px-18789103.jpg"
+                                },
+                                {
+                                    "photographer":  "dauphotographer",
+                                    "alt":  "Stainless steel pots and kitchen essentials on concrete surface under shelf with jars",
+                                    "sourceUrl":  "https://www.pexels.com/photo/modern-kitchenware-setup-with-stainless-steel-pots-30981355/",
+                                    "src":  "/catalog/lifestyle/px-30981355.jpg"
+                                },
+                                {
+                                    "photographer":  "itfeelslikefilm",
+                                    "alt":  "Vertical shot of stainless steel and copper pots and pans hanging in a kitchen",
+                                    "sourceUrl":  "https://www.pexels.com/photo/photo-of-cooking-pots-4509047/",
+                                    "src":  "/catalog/lifestyle/px-4509047.jpg"
+                                },
+                                {
+                                    "photographer":  "iban-lopez-luna-2159602676",
+                                    "alt":  "Colorful pots and pans on display in a traditional Tokyo shop window",
+                                    "sourceUrl":  "https://www.pexels.com/photo/stacked-cookware-display-in-tokyo-storefront-37252631/",
+                                    "src":  "/catalog/lifestyle/px-37252631.jpg"
+                                }
+                            ]
     },
     {
         "slug":  "tc-22cm-stainless-steel-stock-pot-7lt",
@@ -516,7 +562,27 @@
         "sourceAvailability":  "not-confirmed",
         "localPriceUsd":  null,
         "localStock":  null,
-        "color":  "steel"
+        "color":  "steel",
+        "lifestyleImages":  [
+                                {
+                                    "photographer":  "tivasee-17374727",
+                                    "alt":  "A hand lifts the lid of a red pot on a vintage stove, evoking a nostalgic cooking atmosphere",
+                                    "sourceUrl":  "https://www.pexels.com/photo/vintage-kitchen-scene-with-red-cooking-pot-30259380/",
+                                    "src":  "/catalog/lifestyle/px-30259380.jpg"
+                                },
+                                {
+                                    "photographer":  "m-omar-872032462",
+                                    "alt":  "A warm kitchen setting with colorful oven mitts and stainless steel pots",
+                                    "sourceUrl":  "https://www.pexels.com/photo/cozy-kitchen-scene-with-hanging-oven-mitts-31467781/",
+                                    "src":  "/catalog/lifestyle/px-31467781.jpg"
+                                },
+                                {
+                                    "photographer":  "charlotte-may",
+                                    "alt":  "Kitchenware on metal rack with hooks above electric oven with display in house kitchen",
+                                    "sourceUrl":  "https://www.pexels.com/photo/kitchen-utensils-hanging-on-a-wall-5825399/",
+                                    "src":  "/catalog/lifestyle/px-5825399.jpg"
+                                }
+                            ]
     },
     {
         "slug":  "tc-kettle-17lt-teal",
@@ -649,7 +715,27 @@
         "sourceAvailability":  "not-confirmed",
         "localPriceUsd":  null,
         "localStock":  null,
-        "color":  "teal"
+        "color":  "teal",
+        "lifestyleImages":  [
+                                {
+                                    "photographer":  "rebornfilmes",
+                                    "alt":  "Warm rustic kitchen scene with ceramic jars and decorative elements on a wooden shelf",
+                                    "sourceUrl":  "https://www.pexels.com/photo/cozy-rustic-kitchen-with-ceramic-jars-and-decor-34888415/",
+                                    "src":  "/catalog/lifestyle/px-34888415.jpg"
+                                },
+                                {
+                                    "photographer":  "ron-lach",
+                                    "alt":  "Stylish kitchen setup featuring glass jars with pasta and grains on a clean counter",
+                                    "sourceUrl":  "https://www.pexels.com/photo/coffee-beans-and-food-in-glass-jars-on-kitchen-counter-10568352/",
+                                    "src":  "/catalog/lifestyle/px-10568352.jpg"
+                                },
+                                {
+                                    "photographer":  "arina-krasnikova",
+                                    "alt":  "Aesthetic kitchen shelves displaying various jars and containers for organized storage",
+                                    "sourceUrl":  "https://www.pexels.com/photo/glass-jars-on-a-wooden-shelf-in-a-kitchen-6654122/",
+                                    "src":  "/catalog/lifestyle/px-6654122.jpg"
+                                }
+                            ]
     },
     {
         "slug":  "tc-3pc-bowl-set-lids-cherry-125lt-25lt-5lt",
@@ -668,7 +754,27 @@
         "sourceAvailability":  "not-confirmed",
         "localPriceUsd":  null,
         "localStock":  null,
-        "color":  "cherry"
+        "color":  "cherry",
+        "lifestyleImages":  [
+                                {
+                                    "photographer":  "fernando-capetillo-94107723",
+                                    "alt":  "A warm kitchen counter scene with coffee and sugar jars, plants, and decor items",
+                                    "sourceUrl":  "https://www.pexels.com/photo/cozy-kitchen-counter-with-plants-and-jars-scene-36058915/",
+                                    "src":  "/catalog/lifestyle/px-36058915.jpg"
+                                },
+                                {
+                                    "photographer":  "alinaskazka",
+                                    "alt":  "Assorted glass jars filled with cookies and macarons for a sweet kitchen setup",
+                                    "sourceUrl":  "https://www.pexels.com/photo/cookies-in-containers-14939902/",
+                                    "src":  "/catalog/lifestyle/px-14939902.jpg"
+                                },
+                                {
+                                    "photographer":  "juan-tapias-695500451",
+                                    "alt":  "Inviting kitchen shelf display with labeled jars and decorative plant",
+                                    "sourceUrl":  "https://www.pexels.com/photo/cozy-kitchen-shelf-with-jars-and-potted-plant-29559659/",
+                                    "src":  "/catalog/lifestyle/px-29559659.jpg"
+                                }
+                            ]
     },
     {
         "slug":  "tc-3pc-food-warmer-set-teal-06lt-22lt-55lt",
@@ -732,7 +838,27 @@
         "sourceAvailability":  "not-confirmed",
         "localPriceUsd":  null,
         "localStock":  null,
-        "color":  "neutral"
+        "color":  "neutral",
+        "lifestyleImages":  [
+                                {
+                                    "photographer":  "matreding",
+                                    "alt":  "A variety of spices stored in glass jars lined on a shelf, perfect for kitchen organization",
+                                    "sourceUrl":  "https://www.pexels.com/photo/jars-of-spices-on-a-shelf-11911870/",
+                                    "src":  "/catalog/lifestyle/px-11911870.jpg"
+                                },
+                                {
+                                    "photographer":  "monicore",
+                                    "alt":  "A collection of assorted spices in glass jars on a rustic wooden shelf for culinary use",
+                                    "sourceUrl":  "https://www.pexels.com/photo/clear-glass-jar-lot-458796/",
+                                    "src":  "/catalog/lifestyle/px-458796.jpg"
+                                },
+                                {
+                                    "photographer":  "pavel-danilyuk",
+                                    "alt":  "Close-up of glass jars filled with assorted spices and herbs on a wooden cutting board",
+                                    "sourceUrl":  "https://www.pexels.com/photo/clear-glass-jars-with-herbs-and-spices-6996094/",
+                                    "src":  "/catalog/lifestyle/px-6996094.jpg"
+                                }
+                            ]
     },
     {
         "slug":  "tc-3pc-cafe-ebony-storage-set-300ml",
@@ -751,7 +877,27 @@
         "sourceAvailability":  "not-confirmed",
         "localPriceUsd":  null,
         "localStock":  null,
-        "color":  "neutral"
+        "color":  "neutral",
+        "lifestyleImages":  [
+                                {
+                                    "photographer":  "readymade",
+                                    "alt":  "A minimalist kitchen setup features neatly arranged glass jars and wooden kitchenware on a contemporary countertop",
+                                    "sourceUrl":  "https://www.pexels.com/photo/clear-glass-jars-on-table-3847411/",
+                                    "src":  "/catalog/lifestyle/px-3847411.jpg"
+                                },
+                                {
+                                    "photographer":  "readymade",
+                                    "alt":  "A kitchen counter featuring assorted glass jars and wooden cutting boards for stylish storage solutions",
+                                    "sourceUrl":  "https://www.pexels.com/photo/clear-glass-jars-on-white-table-3847449/",
+                                    "src":  "/catalog/lifestyle/px-3847449.jpg"
+                                },
+                                {
+                                    "photographer":  "polina-tankilevitch",
+                                    "alt":  "Glass jars filled with spices on wooden shelves in a zero-waste store",
+                                    "sourceUrl":  "https://www.pexels.com/photo/cinnamon-sticks-in-glass-jar-3735188/",
+                                    "src":  "/catalog/lifestyle/px-3735188.jpg"
+                                }
+                            ]
     },
     {
         "slug":  "tc-5pc-glass-bowl-setlids-9-to-17cm",
@@ -770,7 +916,27 @@
         "sourceAvailability":  "not-confirmed",
         "localPriceUsd":  null,
         "localStock":  null,
-        "color":  "neutral"
+        "color":  "neutral",
+        "lifestyleImages":  [
+                                {
+                                    "photographer":  "mlkbnl",
+                                    "alt":  "Close-up of glass jars with wooden lids on a metal kitchen shelf",
+                                    "sourceUrl":  "https://www.pexels.com/photo/close-up-of-clear-glass-jars-10252345/",
+                                    "src":  "/catalog/lifestyle/px-10252345.jpg"
+                                },
+                                {
+                                    "photographer":  "zvolskiy",
+                                    "alt":  "A collection of glass jars and kitchen utensils on a rustic wooden counter with a white brick background",
+                                    "sourceUrl":  "https://www.pexels.com/photo/glass-jars-on-wooden-surface-2062425/",
+                                    "src":  "/catalog/lifestyle/px-2062425.jpg"
+                                },
+                                {
+                                    "photographer":  "keeganjchecks",
+                                    "alt":  "A cozy kitchen setting with a jar of raw honey and decorative containers on a tray",
+                                    "sourceUrl":  "https://www.pexels.com/photo/cute-containers-in-kitchen-10117717/",
+                                    "src":  "/catalog/lifestyle/px-10117717.jpg"
+                                }
+                            ]
     },
     {
         "slug":  "tc-16pc-contempo-cutlery-set",
@@ -924,7 +1090,27 @@
         "sourceAvailability":  "not-confirmed",
         "localPriceUsd":  null,
         "localStock":  null,
-        "color":  "neutral"
+        "color":  "neutral",
+        "lifestyleImages":  [
+                                {
+                                    "photographer":  "owen-outdoors-409204690",
+                                    "alt":  "A selection of frying pans hanging in a kitchenware shop for sale",
+                                    "sourceUrl":  "https://www.pexels.com/photo/hanging-frying-pans-in-kitchen-store-display-29462835/",
+                                    "src":  "/catalog/lifestyle/px-29462835.jpg"
+                                },
+                                {
+                                    "photographer":  "cottonbro",
+                                    "alt":  "Person stirring sauce in frying pan on a gas stove, showcasing home cooking",
+                                    "sourceUrl":  "https://www.pexels.com/photo/person-cooking-using-frying-pan-7696508/",
+                                    "src":  "/catalog/lifestyle/px-7696508.jpg"
+                                },
+                                {
+                                    "photographer":  "nam-nguyen-2160013572",
+                                    "alt":  "Vintage kitchen utensils hanging with warm lighting creating a cozy atmosphere",
+                                    "sourceUrl":  "https://www.pexels.com/photo/rustic-kitchen-with-hanging-utensils-and-warm-lighting-36509501/",
+                                    "src":  "/catalog/lifestyle/px-36509501.jpg"
+                                }
+                            ]
     },
     {
         "slug":  "tc-28cm-forged-aluminium-grill-pan",
@@ -943,7 +1129,27 @@
         "sourceAvailability":  "not-confirmed",
         "localPriceUsd":  null,
         "localStock":  null,
-        "color":  "neutral"
+        "color":  "neutral",
+        "lifestyleImages":  [
+                                {
+                                    "photographer":  "fajar-alqodry-757698961",
+                                    "alt":  "Detailed view of an old metal cooking pot with a black handle in a rustic kitchen setting",
+                                    "sourceUrl":  "https://www.pexels.com/photo/close-up-of-a-rustic-metal-cooking-pot-31523404/",
+                                    "src":  "/catalog/lifestyle/px-31523404.jpg"
+                                },
+                                {
+                                    "photographer":  "aysegul-aytoren-46790226",
+                                    "alt":  "Rustic kitchen scene with metal pans hanging in ambient light, showcasing culinary atmosphere",
+                                    "sourceUrl":  "https://www.pexels.com/photo/hanging-metal-pans-in-rustic-kitchen-setting-37856130/",
+                                    "src":  "/catalog/lifestyle/px-37856130.jpg"
+                                },
+                                {
+                                    "photographer":  "kelly",
+                                    "alt":  "A variety of kitchenware hanging in a rustic kitchen setting",
+                                    "sourceUrl":  "https://www.pexels.com/photo/assorted-frying-pans-hanging-on-pot-rack-2868977/",
+                                    "src":  "/catalog/lifestyle/px-2868977.jpg"
+                                }
+                            ]
     },
     {
         "slug":  "tc-20cm-forged-aluminium-casserole-with-lid-24lt",
@@ -962,7 +1168,33 @@
         "sourceAvailability":  "not-confirmed",
         "localPriceUsd":  null,
         "localStock":  null,
-        "color":  "neutral"
+        "color":  "neutral",
+        "lifestyleImages":  [
+                                {
+                                    "photographer":  "erlymorales",
+                                    "alt":  "Stylish black pots and saucepan on a turquoise backdrop, perfect for kitchen decor",
+                                    "sourceUrl":  "https://www.pexels.com/photo/cookware-on-towels-12156176/",
+                                    "src":  "/catalog/lifestyle/px-12156176.jpg"
+                                },
+                                {
+                                    "photographer":  "mohsen-naranjani-431200986",
+                                    "alt":  "Close-up of pink cookware and utensils on a wooden countertop, emphasizing elegance and style",
+                                    "sourceUrl":  "https://www.pexels.com/photo/close-up-of-kitchenware-15245005/",
+                                    "src":  "/catalog/lifestyle/px-15245005.jpg"
+                                },
+                                {
+                                    "photographer":  "anna-romanova-1406375",
+                                    "alt":  "An assortment of vintage copper kitchenware displayed outdoors, showcasing rustic charm",
+                                    "sourceUrl":  "https://www.pexels.com/photo/a-large-collection-of-copper-pots-and-pans-16770951/",
+                                    "src":  "/catalog/lifestyle/px-16770951.jpg"
+                                },
+                                {
+                                    "photographer":  "leeloothefirst",
+                                    "alt":  "A cozy display of vintage kitchen utensils hanging against a white tiled wall, showcasing a rustic charm",
+                                    "sourceUrl":  "https://www.pexels.com/photo/white-pot-hanging-on-the-wall-5447065/",
+                                    "src":  "/catalog/lifestyle/px-5447065.jpg"
+                                }
+                            ]
     },
     {
         "slug":  "tc-black-onyx-chefs-knife",
