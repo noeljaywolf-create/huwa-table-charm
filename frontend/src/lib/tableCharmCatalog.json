@@ -687,7 +687,33 @@
         "sourceAvailability":  "not-confirmed",
         "localPriceUsd":  null,
         "localStock":  null,
-        "color":  "teal"
+        "color":  "teal",
+        "lifestyleImages":  [
+                                {
+                                    "photographer":  "micheile",
+                                    "alt":  "Close-up of a pink ceramic plate and bowl set featuring delicate leaf patterns on a textured surface",
+                                    "sourceUrl":  "https://www.pexels.com/photo/pink-plate-and-bowl-with-leaves-design-10410296/",
+                                    "src":  "/catalog/lifestyle/px-10410296.jpg"
+                                },
+                                {
+                                    "photographer":  "micheile",
+                                    "alt":  "A stylish flatlay of pink and green ceramic leaf-shaped bowls with natural accents",
+                                    "sourceUrl":  "https://www.pexels.com/photo/green-and-pink-ceramic-bowls-with-leaves-design-10410299/",
+                                    "src":  "/catalog/lifestyle/px-10410299.jpg"
+                                },
+                                {
+                                    "photographer":  "pavel-danilyuk",
+                                    "alt":  "A close-up of colorful ceramic bowls and cups on a white table",
+                                    "sourceUrl":  "https://www.pexels.com/photo/close-up-shot-of-ceramics-tableware-7674568/",
+                                    "src":  "/catalog/lifestyle/px-7674568.jpg"
+                                },
+                                {
+                                    "photographer":  "drakenicolls",
+                                    "alt":  "Close-up of hands holding pastel pink ceramic bowl with matching mug and saucer",
+                                    "sourceUrl":  "https://www.pexels.com/photo/person-pouring-water-on-white-ceramic-teacup-11877470/",
+                                    "src":  "/catalog/lifestyle/px-11877470.jpg"
+                                }
+                            ]
     },
     {
         "slug":  "tc-3pc-sugar-spice-storage-set-350ml",
@@ -763,7 +789,33 @@
         "sourceAvailability":  "not-confirmed",
         "localPriceUsd":  null,
         "localStock":  null,
-        "color":  "neutral"
+        "color":  "neutral",
+        "lifestyleImages":  [
+                                {
+                                    "photographer":  "furkanfdemir",
+                                    "alt":  "Close-up of a stylish ceramic bowl and plate setting with silverware on a rustic table",
+                                    "sourceUrl":  "https://www.pexels.com/photo/close-up-shot-of-ceramic-bowl-on-a-plate-10821203/",
+                                    "src":  "/catalog/lifestyle/px-10821203.jpg"
+                                },
+                                {
+                                    "photographer":  "rdne",
+                                    "alt":  "Top view of stacked ceramic tableware including plates, cups, and a jug in a minimalist setup",
+                                    "sourceUrl":  "https://www.pexels.com/photo/a-top-view-of-stacked-tablewares-8903301/",
+                                    "src":  "/catalog/lifestyle/px-8903301.jpg"
+                                },
+                                {
+                                    "photographer":  "rdne",
+                                    "alt":  "A stylish arrangement of ceramic dinnerware with pastel cups and chopsticks on a blue background",
+                                    "sourceUrl":  "https://www.pexels.com/photo/table-wares-on-blue-surface-8903330/",
+                                    "src":  "/catalog/lifestyle/px-8903330.jpg"
+                                },
+                                {
+                                    "photographer":  "rdne",
+                                    "alt":  "Top view of colorful plates and a hand holding a glass of milk with chopsticks",
+                                    "sourceUrl":  "https://www.pexels.com/photo/a-person-holding-a-drinking-glass-8903284/",
+                                    "src":  "/catalog/lifestyle/px-8903284.jpg"
+                                }
+                            ]
     },
     {
         "slug":  "tc-golden-round-tray-375cm",
@@ -782,7 +834,33 @@
         "sourceAvailability":  "not-confirmed",
         "localPriceUsd":  null,
         "localStock":  null,
-        "color":  "gold"
+        "color":  "gold",
+        "lifestyleImages":  [
+                                {
+                                    "photographer":  "yankrukov",
+                                    "alt":  "Festive holiday table setting with candles, cutlery, and fir tree centerpiece",
+                                    "sourceUrl":  "https://www.pexels.com/photo/photo-of-table-setting-at-christmastime-6209339/",
+                                    "src":  "/catalog/lifestyle/px-6209339.jpg"
+                                },
+                                {
+                                    "photographer":  "daliladalprat",
+                                    "alt":  "Sophisticated table setup featuring Christmas ornaments and elegant cutlery, perfect for fine dining indoors",
+                                    "sourceUrl":  "https://www.pexels.com/photo/table-setup-for-christmas-dinner-6402158/",
+                                    "src":  "/catalog/lifestyle/px-6402158.jpg"
+                                },
+                                {
+                                    "photographer":  "rdne",
+                                    "alt":  "A vibrant collection of modern ceramic tableware on a gray background, perfect for contemporary dining",
+                                    "sourceUrl":  "https://www.pexels.com/photo/colorful-plates-on-the-table-8903358/",
+                                    "src":  "/catalog/lifestyle/px-8903358.jpg"
+                                },
+                                {
+                                    "photographer":  "pavel-danilyuk",
+                                    "alt":  "A minimalist arrangement of pastel ceramic dishware including bowls and plates",
+                                    "sourceUrl":  "https://www.pexels.com/photo/ceramic-plates-and-cups-on-the-table-7674572/",
+                                    "src":  "/catalog/lifestyle/px-7674572.jpg"
+                                }
+                            ]
     },
     {
         "slug":  "tc-birchwood-melamine-tray-54cm",
@@ -801,7 +879,33 @@
         "sourceAvailability":  "not-confirmed",
         "localPriceUsd":  null,
         "localStock":  null,
-        "color":  "neutral"
+        "color":  "neutral",
+        "lifestyleImages":  [
+                                {
+                                    "photographer":  "mathilde",
+                                    "alt":  "Rustic dining setting with ceramic bowls, cups, and plates on a wooden table, creating a cozy ambiance",
+                                    "sourceUrl":  "https://www.pexels.com/photo/ceramic-bowls-on-wooden-table-14320922/",
+                                    "src":  "/catalog/lifestyle/px-14320922.jpg"
+                                },
+                                {
+                                    "photographer":  "eva-bronzini",
+                                    "alt":  "Close-up of a rustic wooden bowl and plate set on a textured fabric surface, showcasing natural elegance",
+                                    "sourceUrl":  "https://www.pexels.com/photo/a-wooden-plates-and-bowl-6469342/",
+                                    "src":  "/catalog/lifestyle/px-6469342.jpg"
+                                },
+                                {
+                                    "photographer":  "drakenicolls",
+                                    "alt":  "Minimalist still life featuring white ceramic tableware on soft cloth",
+                                    "sourceUrl":  "https://www.pexels.com/photo/a-spoon-on-a-ceramic-plate-near-the-ceramic-bowl-11371873/",
+                                    "src":  "/catalog/lifestyle/px-11371873.jpg"
+                                },
+                                {
+                                    "photographer":  "olgalioncat",
+                                    "alt":  "Crop faceless male with bowl of bulgur with spinach and pomegranate seeds on white plate with cut vegetables standing neat table on blurred background",
+                                    "sourceUrl":  "https://www.pexels.com/photo/unrecognizable-man-with-delicious-dish-in-restaurant-7245478/",
+                                    "src":  "/catalog/lifestyle/px-7245478.jpg"
+                                }
+                            ]
     },
     {
         "slug":  "tc-22cm-forged-aluminium-frying-pan",
@@ -877,7 +981,27 @@
         "sourceAvailability":  "not-confirmed",
         "localPriceUsd":  null,
         "localStock":  null,
-        "color":  "neutral"
+        "color":  "neutral",
+        "lifestyleImages":  [
+                                {
+                                    "photographer":  "franci-259818929",
+                                    "alt":  "Elegant stack of ceramic bowls with colorful stripes on a reflective surface",
+                                    "sourceUrl":  "https://www.pexels.com/photo/a-stack-of-ceramic-bowls-12630694/",
+                                    "src":  "/catalog/lifestyle/px-12630694.jpg"
+                                },
+                                {
+                                    "photographer":  "rdne",
+                                    "alt":  "Contemporary ceramic crockery set with cups and plates on a gray background",
+                                    "sourceUrl":  "https://www.pexels.com/photo/yellow-plates-on-the-table-8903679/",
+                                    "src":  "/catalog/lifestyle/px-8903679.jpg"
+                                },
+                                {
+                                    "photographer":  "rdne",
+                                    "alt":  "Top view of vibrant plates and hand holding a glass, minimalist style on gray background",
+                                    "sourceUrl":  "https://www.pexels.com/photo/a-person-holding-a-drinking-glass-8903291/",
+                                    "src":  "/catalog/lifestyle/px-8903291.jpg"
+                                }
+                            ]
     },
     {
         "slug":  "tc-black-onyx-kitchen-scissor",
@@ -896,6 +1020,20 @@
         "sourceAvailability":  "not-confirmed",
         "localPriceUsd":  null,
         "localStock":  null,
-        "color":  "neutral"
+        "color":  "neutral",
+        "lifestyleImages":  [
+                                {
+                                    "photographer":  "drakenicolls",
+                                    "alt":  "Elegant arrangement of ceramic bowl and vase with dried plants, in a soft minimalist setting",
+                                    "sourceUrl":  "https://www.pexels.com/photo/ceramic-tablewares-on-the-table-11232063/",
+                                    "src":  "/catalog/lifestyle/px-11232063.jpg"
+                                },
+                                {
+                                    "photographer":  "cottonbro",
+                                    "alt":  "Chic tabletop arrangement featuring potted plants and glassware on wooden table",
+                                    "sourceUrl":  "https://www.pexels.com/photo/wine-glasses-near-a-potted-plant-on-a-wooden-table-9707350/",
+                                    "src":  "/catalog/lifestyle/px-9707350.jpg"
+                                }
+                            ]
     }
 ]
